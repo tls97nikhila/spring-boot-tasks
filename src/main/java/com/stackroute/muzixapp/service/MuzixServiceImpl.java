@@ -31,6 +31,13 @@ public class MuzixServiceImpl implements MuzixService {
     }
 
     @Override
+    public List<Track> getByName(String name) {
+        List<Track> userId= muzixRepository.findTitleByName(name);
+
+        return userId;
+    }
+
+    @Override
     public boolean updateById(Track track, int id) {
         Optional<Track> trackOptional = muzixRepository.findById(id);
 

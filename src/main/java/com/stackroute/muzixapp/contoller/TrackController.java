@@ -44,7 +44,13 @@ public class TrackController {
 
     }
     @GetMapping("track")
-    public ResponseEntity<?> getAllUsers(){
+    public ResponseEntity<?> getAllTracks(){
         return new ResponseEntity<List<Track>>(muzixService.getAllTracks(),HttpStatus.OK);
+    }
+
+    @GetMapping("name/{name}")
+    public  ResponseEntity<List<Track>> getByName(@PathVariable String name){
+        List<Track> tracks= muzixService.getByName(name);
+        return new ResponseEntity<List<Track>>(tracks,HttpStatus.OK);
     }
 }
