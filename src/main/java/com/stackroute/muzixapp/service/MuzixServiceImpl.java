@@ -4,14 +4,20 @@ import com.stackroute.muzixapp.domain.Track;
 import com.stackroute.muzixapp.exceptions.TrackAlreadyExistsException;
 import com.stackroute.muzixapp.exceptions.TrackNotFoundException;
 import com.stackroute.muzixapp.repository.MuzixRepository;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ApplicationContextEvent;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MuzixServiceImpl implements MuzixService{
+public class MuzixServiceImpl implements MuzixService , ApplicationListener<ContextRefreshedEvent> , CommandLineRunner {
     MuzixRepository muzixRepository;
 
 
@@ -64,6 +70,23 @@ public class MuzixServiceImpl implements MuzixService{
     @Override
     public List<Track> getAllTracks() {
         return muzixRepository.findAll();
+    }
+
+
+    // For Application Listner
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        muzixRepository.save(new Track(1, "all of me", "Sudeep"));
+        muzixRepository.save(new Track(2, "DNA",  "Ravi"));
+    }
+
+
+    @Override
+    public void run(String... args) throws Exception {
+        final Log logger = LogFactory.getLog(getClass());
+        logger.info("Application Started ..............!");
+
+
     }
 
 }
