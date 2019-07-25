@@ -7,6 +7,7 @@ import com.stackroute.muzixapp.repository.MuzixRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ApplicationContextEvent;
@@ -18,6 +19,16 @@ import java.util.Optional;
 
 @Service
 public class MuzixServiceImpl implements MuzixService , ApplicationListener<ContextRefreshedEvent> , CommandLineRunner {
+
+    @Value("${track.1.trackName:default}")
+    String name1;
+    @Value("${track.1.trackComments:default}")
+    String comments1;
+    @Value("${track.2.trackName:default}")
+    String name2;
+    @Value("${track.2.trackComments:default}")
+    String comments2;
+
     MuzixRepository muzixRepository;
 
 
@@ -76,8 +87,8 @@ public class MuzixServiceImpl implements MuzixService , ApplicationListener<Cont
     // For Application Listner
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        muzixRepository.save(new Track(1, "all of me", "Sudeep"));
-        muzixRepository.save(new Track(2, "DNA",  "Ravi"));
+        muzixRepository.save(new Track(1, name1,comments1 ));
+        muzixRepository.save(new Track(2, name2,  comments2));
     }
 
 
