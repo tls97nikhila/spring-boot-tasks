@@ -17,7 +17,7 @@ public class TrackController {
         this.muzixService=muzixService;
     }
     @PostMapping("track")
-    public ResponseEntity<?> saveTrack(@RequestBody Track track){
+    public ResponseEntity<?> saveTrack(@RequestBody Track track)throws TrackAlreadyExistsException{
         ResponseEntity responseEntity;
         try {
             muzixService.saveTrack(track);
@@ -31,13 +31,13 @@ public class TrackController {
     }
 
     @DeleteMapping("track/{id}")
-    public ResponseEntity<?> deleteTrack(@PathVariable("id") int id) {
+    public ResponseEntity<?> deleteTrack(@PathVariable("id") int id) throws TrackNotFoundException{
         muzixService.deleteById(id);
         return new ResponseEntity<List<Track>>(muzixService.getAllTracks(), HttpStatus.OK);
     }
 
     @PutMapping("update/{id}")
-    public ResponseEntity<?> updateTrack(@RequestBody Track track, @PathVariable int id){
+    public ResponseEntity<?> updateTrack(@RequestBody Track track, @PathVariable int id) throws TrackNotFoundException{
       if(  muzixService.updateById(track,id)){
           return ResponseEntity.notFound().build();
       }
@@ -46,12 +46,12 @@ public class TrackController {
 
     }
     @GetMapping("track")
-    public ResponseEntity<?> getAllTracks(){
+    public ResponseEntity<?> getAllTracks() {
         return new ResponseEntity<List<Track>>(muzixService.getAllTracks(),HttpStatus.OK);
     }
 
     @GetMapping("name/{name}")
-    public  ResponseEntity<List<Track>> getByName(@PathVariable String name){
+    public  ResponseEntity<List<Track>> getByName(@PathVariable String name)throws TrackNotFoundException{
         List<Track> tracks= muzixService.getByName(name);
         return new ResponseEntity<List<Track>>(tracks,HttpStatus.OK);
     }
