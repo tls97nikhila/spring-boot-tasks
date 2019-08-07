@@ -44,9 +44,12 @@ public class MuzixServiceImpl implements MuzixService{
     }
 
     @Override
-    public List<Track> getByName(String name) {
+    public List<Track> getByName(String name) throws TrackNotFoundException {
         List<Track> userId= muzixRepository.findTitleByName(name);
-
+      
+if(!userId.isPresent()){
+            throw new TrackNotFoundException("Track not found!");
+        }
         return userId;
     }
 
@@ -65,8 +68,13 @@ public class MuzixServiceImpl implements MuzixService{
     }
 
     @Override
-    public List<Track> getAllTracks() {
-        return muzixRepository.findAll();
+    public List<Track> getAllTracks() throws TrackNotFoundExecption{
+        List<Track> list= muzixRepository.findAll();
+      if(list.isEmpty()){
+        throw new TrackNotFoundException("tracks not found")
+      }
     }
+  
+  
 
 }
