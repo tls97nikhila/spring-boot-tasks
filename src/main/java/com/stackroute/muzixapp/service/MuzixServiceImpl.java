@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 public class MuzixServiceImpl implements MuzixService{
-    MuzixRepository muzixRepository;
+  private  MuzixRepository muzixRepository;
 
 
     @Autowired
@@ -34,12 +34,13 @@ public class MuzixServiceImpl implements MuzixService{
     }
 
     @Override
-    public void deleteById(int id) throws TrackNotFoundException {
+    public boolean deleteById(int id) throws TrackNotFoundException {
         Optional<Track> userId = muzixRepository.findById(id);
        if(!userId.isPresent()){
             throw new TrackNotFoundException("Track not found!");
         }
         muzixRepository.deleteById(id);
+        return true;
     }
 
     @Override
@@ -50,15 +51,17 @@ public class MuzixServiceImpl implements MuzixService{
     }
 
     @Override
-    public boolean updateById(Track track, int id) {
+    public Track updateById(Track track, int id) thorws TrackNotFoundException {
         Optional<Track> trackOptional = muzixRepository.findById(id);
 
-        if(!trackOptional.isPresent())
-        return false;
+        if(!trackOptional.isPresent()){
+           throw new TrackNotFoundException("Track not found!");
+        }
+        
 
         track.setId(id);
         muzixRepository.save(track);
-        return  true;
+        return  trackOptional.get();
     }
 
     @Override
