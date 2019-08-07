@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "muzixapp/v1")
+@RequestMapping(value = "api/v1")
 public class TrackController {
     MuzixService muzixService;
 
