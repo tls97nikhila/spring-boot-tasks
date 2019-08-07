@@ -13,7 +13,7 @@ public interface MuzixService {
 
    public boolean updateById(Track track, int id) throws TrackNotFoundException;
 
-    public  List<Track> getAllTracks();
+    public  List<Track> getAllTracks() throws TrackNotFoundException;
 
-    public  List<Track> getByName(String name);
+    public  List<Track> getByName(String name) throws TrackNotFoundException;
 }
