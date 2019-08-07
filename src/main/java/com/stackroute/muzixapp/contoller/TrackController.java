@@ -37,11 +37,12 @@ public class TrackController {
     }
 
     @PutMapping("update/{id}")
-    public String updateTrack(@RequestBody Track track, @PathVariable int id){
-        muzixService.updateById(track,id);
-        return "Updated";
-
-
+    public  ResponseEntity<Track> updateTrack(@RequestBody Track track, @PathVariable int id){
+        if(muzixService.updateById(track,id)){
+              return ResponseEntity.notFound().build();
+        }
+            
+        return ResponseEntity.noContent().build();
     }
     @GetMapping("track")
     public ResponseEntity<?> getAllTracks(){
