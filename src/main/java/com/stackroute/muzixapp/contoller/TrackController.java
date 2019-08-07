@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "api/v1")
 public class TrackController {
-    MuzixService muzixService;
+ private   MuzixService muzixService;
 
     public TrackController(MuzixService muzixService){
         this.muzixService=muzixService;
@@ -44,7 +44,7 @@ public class TrackController {
 
     }
     @GetMapping("track")
-    public ResponseEntity<?> getAllUsers(){
+    public ResponseEntity<?> getAllTracks(){
         return new ResponseEntity<List<Track>>(muzixService.getAllTracks(),HttpStatus.OK);
     }
 }
