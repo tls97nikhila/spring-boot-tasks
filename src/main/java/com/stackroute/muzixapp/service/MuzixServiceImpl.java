@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Service
 public class MuzixServiceImpl implements MuzixService {
-    MuzixRepository muzixRepository;
+ private   MuzixRepository muzixRepository;
 
 
     @Autowired
@@ -26,27 +26,21 @@ public class MuzixServiceImpl implements MuzixService {
     }
 
     @Override
-    public void deleteById(int id) {
+    public boolean deleteById(int id) {
         muzixRepository.deleteById(id);
+        return true;
     }
 
     @Override
-    public List<Track> getByName(String name) {
-        List<Track> userId= muzixRepository.findTitleByName(name);
-
-        return userId;
-    }
-
-    @Override
-    public boolean updateById(Track track, int id) {
+    public Track updateById(Track track, int id) {
         Optional<Track> trackOptional = muzixRepository.findById(id);
 
         if(!trackOptional.isPresent())
-        return false;
+        return trackOptional.get();
 
         track.setId(id);
         muzixRepository.save(track);
-        return  true;
+        return  trackOptional.get();
     }
 
     @Override
