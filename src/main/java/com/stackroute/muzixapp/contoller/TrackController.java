@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "api/v1")
 public class TrackController {
-   private  MuzixService muzixService;
+   private MuzixService muzixService;
 
     public TrackController(MuzixService muzixService){
         this.muzixService=muzixService;
@@ -34,7 +34,7 @@ public class TrackController {
     }
 
     @DeleteMapping("track/{id}")
-    public ResponseEntity<?> deleteTrack(@PathVariable("id") int id) {
+    public ResponseEntity<?> deleteTrack(@PathVariable("id") int id) throws TrackNotFoundException {
         ResponseEntity responseEntity;
         try {
             muzixService.deleteById(id);
@@ -45,20 +45,17 @@ public class TrackController {
     }
 
     @PutMapping("update/{id}")
-    public  ResponseEntity<Track> updateTrack(@RequestBody Track track, @PathVariable int id){
-        if(muzixService.updateById(track,id)){
-              return ResponseEntity.notFound().build();
-        }
-            
+    public  ResponseEntity<Track> updateTrack(@RequestBody Track track, @PathVariable int id) throws TrackNotFoundException{
+     Track track1=   muzixService.updateById(track,id);
         return ResponseEntity.noContent().build();
     }
     @GetMapping("track")
-    public ResponseEntity<?> getAllTracks(){
+    public ResponseEntity<?> getAllTracks() throws TrackNotFoundException{
         return new ResponseEntity<List<Track>>(muzixService.getAllTracks(),HttpStatus.OK);
     }
 
     @GetMapping("name/{name}")
-    public  ResponseEntity<List<Track>> getByName(@PathVariable String name){
+    public  ResponseEntity<List<Track>> getByName(@PathVariable String name) throws TrackNotFoundException{
         List<Track> tracks= muzixService.getByName(name);
         return new ResponseEntity<List<Track>>(tracks,HttpStatus.OK);
     }
