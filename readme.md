@@ -17,7 +17,7 @@
     1. Task 5: Create custom exceptions TrackNotFoundException, TrackAlreadyExistsException in a
 com.stack....exceptions package. Perform appropriate exception handling and propagation
 Back.
-6. seeddata
+6. seed-data
     1. Task 6: Running Logic on Startup in Spring. Create seed data to pre-fill the database with track
 information whenever the application starts. Use both approaches:
     Approach 1. ApplicationListener<ContextRefreshedEvent>
@@ -36,8 +36,8 @@ information whenever the application starts. Use both approaches:
      1. Task 9: Add @Lombok
 (https://drive.google.com/file/d/1QQpEQZbDD9pmW2qrhYsx5N9XYQ5bJ5dM/view)
 ## Mockito Test Cases task 
-10. musixapp-mockito-testcases branch
+10. mockito-tests-new branch
       1. Spring musixapp for testcases in all 3 layers
 ## Musix app implementation using mongodb 
-11. musix-using-mongodb branch 
+11. mongodb-new branch 
       1. Implemented using mongodb instead of mysql.
