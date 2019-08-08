@@ -89,7 +89,7 @@ public class MuzixServiceImpl implements MuzixService  {
     }
 
     @Override
-    public List<Track> getAllTracks() {
+    public List<Track> getAllTracks()  throws TrackNotFoundException{
         return muzixRepository.findAll();
     }
 
