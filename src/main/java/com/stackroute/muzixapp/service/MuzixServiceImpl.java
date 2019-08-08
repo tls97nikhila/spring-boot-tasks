@@ -39,14 +39,14 @@ public class MuzixServiceImpl implements MuzixService  {
         return savedTrack;
     }
 
-    @Override
-    public boolean deleteById(int id) throws TrackNotFoundException {
-        Optional<Track> userId = muzixRepository.findById(id);
-       if(!userId.isPresent()){
+        @Override
+    public List<Track> deleteById(int id) throws TrackNotFoundException {
+        Optional<Track> tracks = muzixRepository.findById(id);
+        if(tracks.isEmpty()){
             throw new TrackNotFoundException("Track not found!");
         }
         muzixRepository.deleteById(id);
-        return true;
+        return  muzixRepository.findAll();
     }
 
     @Override
