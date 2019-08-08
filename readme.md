@@ -17,7 +17,7 @@
     1. Task 5: Create custom exceptions TrackNotFoundException, TrackAlreadyExistsException in a
 com.stack....exceptions package. Perform appropriate exception handling and propagation
 Back.
-6. startup-action
+6. seeddata
     1. Task 6: Running Logic on Startup in Spring. Create seed data to pre-fill the database with track
 information whenever the application starts. Use both approaches:
     Approach 1. ApplicationListener<ContextRefreshedEvent>
@@ -25,7 +25,7 @@ information whenever the application starts. Use both approaches:
 
 7. global-exception
       1. Task 7: Global exception using Controller advice
-8. application-properties
+8. app-prop-new
       1. Task 8: Remove all hard coded data from the application code to application.properties
   a)by using @Value.
   b)by using @PropertySource
