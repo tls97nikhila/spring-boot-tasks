@@ -14,8 +14,8 @@ import javax.persistence.Id;
 
 public class Track {
     @Id
-    int id;
-    String trackName;
-    String trackComments;
+   private  int id;
+   private  String trackName;
+   private  String trackComments;
 }
 
