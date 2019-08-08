@@ -24,12 +24,13 @@ public class MuzixServiceImpl implements MuzixService {
 
         return savedTrack;
     }
-
     @Override
-    public boolean deleteById(int id) {
+    public List<Track> deleteById(int id) {
+        Optional<Track> tracks = muzixRepository.findById(id);
         muzixRepository.deleteById(id);
-        return true;
+        return  muzixRepository.findAll();
     }
+
 
     @Override
     public Track updateById(Track track, int id) {
